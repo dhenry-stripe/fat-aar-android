@@ -152,6 +152,18 @@ class FlavorArtifact {
                 }
             }
 
+            // 1. find the same flavor using matchingFallbacks
+            variant.getBuildType().matchingFallbacks.each { matchingFallbackName ->
+                if (subVariant.name == matchingFallbackName) {
+                    try {
+                        bundleTaskProvider = VersionAdapter.getBundleTaskProvider(project, subVariant.name as String)
+                        return true
+                    } catch (Exception ignore) {
+                        return false
+                    }
+                }
+            }
+
             if (variant.productFlavors.isEmpty()) {
                 return false
             }
