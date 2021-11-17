@@ -122,7 +122,7 @@ class FlavorArtifact {
 
     private static Project getArtifactProject(Project project, ResolvedDependency unResolvedArtifact) {
         for (Project p : project.getRootProject().getAllprojects()) {
-            if (unResolvedArtifact.moduleName == p.name) {
+            if (unResolvedArtifact.module.id.group == p.group && unResolvedArtifact.moduleName == p.name) {
                 return p
             }
         }
